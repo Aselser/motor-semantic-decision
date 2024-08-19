@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on agosto 19, 2024, at 17:40
+    on agosto 19, 2024, at 19:50
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -112,7 +112,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\agust\\OneDrive\\Desktop\\CNC\\Paradigmas\\Python\\semantic-decision\\semantic-decision_lastrun.py',
+        originPath='C:\\Users\\agust\\OneDrive\\Desktop\\CNC\\Paradigmas\\Python\\motor-semantic-decision\\semantic-decision_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1853,7 +1853,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         thisExp.addData('pause.started', globalClock.getTime())
         # skip this Routine if its 'Skip if' condition is True
-        continueRoutine = continueRoutine and not (trials.thisTrialN % 65 != 0)
+        continueRoutine = continueRoutine and not (trials.thisTrialN % 65 != 64)
         key_resp_4.keys = []
         key_resp_4.rt = []
         _key_resp_4_allKeys = []
@@ -1964,7 +1964,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # --- Prepare to start Routine "acknowledgment" ---
     continueRoutine = True
     # update component parameters for each repeat
-    thisExp.addData('acknowledgment.started', globalClock.getTime())
     key_resp_end.keys = []
     key_resp_end.rt = []
     _key_resp_end_allKeys = []
@@ -2001,8 +2000,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             text_ending.tStart = t  # local t and not account for scr refresh
             text_ending.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text_ending, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text_ending.started')
             # update status
             text_ending.status = STARTED
             text_ending.setAutoDraw(True)
@@ -2022,8 +2019,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             key_resp_end.tStart = t  # local t and not account for scr refresh
             key_resp_end.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(key_resp_end, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'key_resp_end.started')
             # update status
             key_resp_end.status = STARTED
             # keyboard checking is just starting
@@ -2065,15 +2060,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     for thisComponent in acknowledgmentComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    thisExp.addData('acknowledgment.stopped', globalClock.getTime())
-    # check responses
-    if key_resp_end.keys in ['', [], None]:  # No response was made
-        key_resp_end.keys = None
-    thisExp.addData('key_resp_end.keys',key_resp_end.keys)
-    if key_resp_end.keys != None:  # we had a response
-        thisExp.addData('key_resp_end.rt', key_resp_end.rt)
-        thisExp.addData('key_resp_end.duration', key_resp_end.duration)
-    thisExp.nextEntry()
     # the Routine "acknowledgment" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     # Run 'End Experiment' code from code_2
