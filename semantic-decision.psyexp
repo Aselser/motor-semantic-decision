@@ -196,6 +196,23 @@
       </KeyboardComponent>
     </Routine>
     <Routine name="fx_cross_practice">
+      <CodeComponent name="code_5" plugin="None">
+        <Param val="# Fixation cross duration&amp;#10;fixDurMin = 0.6 # minimum: 600 ms&amp;#10;fixDurMax = 0.8 # maximum: 800 ms&amp;#10;&amp;#10;# Blank duration&amp;#10;fixDurBlankMin = 0.2 # minimum: 200 ms&amp;#10;fixDurBlankMax = 0.3 # maximum: 300 ms" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="fixDurMin = 0.6;&amp;#10;fixDurMax = 0.8;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="# Fixation cross duration for this trial&amp;#10;fixDur = np.random.uniform(fixDurMin, fixDurMax)  # random between minimum and maximum&amp;#10;fixDurFrames = round(fixDur * 60)&amp;#10;thisExp.addData('fixation_duration',fixDurFrames/60) &amp;#10;thisExp.addData('fixation_n_frames',fixDurFrames) &amp;#10;&amp;#10;# Fixation cross duration for this trial&amp;#10;fixBlankDur = np.random.uniform(fixDurBlankMin, fixDurBlankMax) # random between minimum and maximum&amp;#10;fixBlankDurFrames = round(fixBlankDur * 60)&amp;#10;thisExp.addData('blank_duration',fixBlankDurFrames/60) &amp;#10;thisExp.addData('blank_n_frames',fixBlankDurFrames) " valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Py" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_5" valType="code" updates="None" name="name"/>
+      </CodeComponent>
       <RoutineSettingsComponent name="fx_cross_practice" plugin="None">
         <Param val="none" valType="str" updates="None" name="backgroundFit"/>
         <Param val="" valType="str" updates="None" name="backgroundImg"/>
@@ -216,7 +233,7 @@
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="0.7" valType="code" updates="None" name="durationEstim"/>
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
@@ -228,11 +245,36 @@
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.7" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="0.3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (frames)" valType="str" updates="None" name="stopType"/>
+        <Param val="fixDurFrames" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="+" valType="str" updates="constant" name="text"/>
+        <Param val="+" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="blank_random" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="0.15" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="blank_random" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="0.7" valType="code" updates="None" name="startEstim"/>
+        <Param val="condition" valType="str" updates="None" name="startType"/>
+        <Param val="fx_cross_1.status==FINISHED" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (frames)" valType="str" updates="None" name="stopType"/>
+        <Param val="fixBlankDurFrames" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -272,7 +314,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="0.3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="$practiceWord" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -290,9 +332,9 @@
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.3" valType="code" updates="None" name="startVal"/>
+        <Param val="0.5" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="3.7" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
@@ -512,7 +554,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="0.3" valType="code" updates="constant" name="stopVal"/>
+        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="$Word" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -532,7 +574,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.3" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="3.7" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
@@ -986,6 +1028,7 @@
     </LoopInitiator>
     <Routine name="fx_cross_practice"/>
     <Routine name="stim_practice"/>
+    <Routine name="feedback"/>
     <LoopTerminator name="trials_practice"/>
     <Routine name="instructions"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
@@ -999,7 +1042,7 @@
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
-    <Routine name="fx_cross_routine"/>
+    <Routine name="fx_cross_practice"/>
     <Routine name="stim"/>
     <Routine name="pause"/>
     <LoopTerminator name="trials"/>

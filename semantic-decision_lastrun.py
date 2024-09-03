@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on agosto 19, 2024, at 22:22
+    on septiembre 03, 2024, at 10:16
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -49,6 +49,22 @@ def list_serial_ports():
 
     return arduino_ports[0]
 
+# Run 'Before Experiment' code from code_5
+# Fixation cross duration
+fixDurMin = 0.6 # minimum: 600 ms
+fixDurMax = 0.8 # maximum: 800 ms
+
+# Blank duration
+fixDurBlankMin = 0.2 # minimum: 200 ms
+fixDurBlankMax = 0.3 # maximum: 300 ms
+# Run 'Before Experiment' code from code_5
+# Fixation cross duration
+fixDurMin = 0.6 # minimum: 600 ms
+fixDurMax = 0.8 # maximum: 800 ms
+
+# Blank duration
+fixDurBlankMin = 0.2 # minimum: 200 ms
+fixDurBlankMax = 0.3 # maximum: 300 ms
 # --- Setup global variables (available in all functions) ---
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -402,12 +418,19 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "fx_cross_practice" ---
     fx_cross_1 = visual.TextStim(win=win, name='fx_cross_1',
-        text='+',
+        text='',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
+    blank_random = visual.TextStim(win=win, name='blank_random',
+        text=None,
+        font='Open Sans',
+        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
     
     # --- Initialize components for Routine "stim_practice" ---
     practice_stimulus = visual.TextStim(win=win, name='practice_stimulus',
@@ -419,6 +442,15 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         depth=0.0);
     key_resp_practice_stim = keyboard.Keyboard()
     
+    # --- Initialize components for Routine "feedback" ---
+    feedback_text_comp = visual.TextStim(win=win, name='feedback_text_comp',
+        text='',
+        font='Open Sans',
+        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-1.0);
+    
     # --- Initialize components for Routine "instructions" ---
     text_instructions = visual.TextStim(win=win, name='text_instructions',
         text='Ahora comenzará la tarea. Respondé lo más rápido que puedas sin cometer errores. \n\nPresioná ESPACIO para continuar.',
@@ -429,14 +461,21 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         depth=0.0);
     key_resp_instructiones = keyboard.Keyboard()
     
-    # --- Initialize components for Routine "fx_cross_routine" ---
-    fx_cross_text_2 = visual.TextStim(win=win, name='fx_cross_text_2',
-        text='+',
+    # --- Initialize components for Routine "fx_cross_practice" ---
+    fx_cross_1 = visual.TextStim(win=win, name='fx_cross_1',
+        text='',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
+    blank_random = visual.TextStim(win=win, name='blank_random',
+        text=None,
+        font='Open Sans',
+        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
     
     # --- Initialize components for Routine "stim" ---
     stimulus = visual.TextStim(win=win, name='stimulus',
@@ -1242,8 +1281,22 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         thisExp.addData('fx_cross_practice.started', globalClock.getTime())
+        # Run 'Begin Routine' code from code_5
+        # Fixation cross duration for this trial
+        fixDur = np.random.uniform(fixDurMin, fixDurMax)  # random between minimum and maximum
+        fixDurFrames = round(fixDur * 60)
+        thisExp.addData('fixation_duration',fixDurFrames/60) 
+        thisExp.addData('fixation_n_frames',fixDurFrames) 
+        
+        # Fixation cross duration for this trial
+        fixBlankDur = np.random.uniform(fixDurBlankMin, fixDurBlankMax) # random between minimum and maximum
+        fixBlankDurFrames = round(fixBlankDur * 60)
+        thisExp.addData('blank_duration',fixBlankDurFrames/60) 
+        thisExp.addData('blank_n_frames',fixBlankDurFrames) 
+        fx_cross_1.setText('+')
+        blank_random.setText('')
         # keep track of which components have finished
-        fx_cross_practiceComponents = [fx_cross_1]
+        fx_cross_practiceComponents = [fx_cross_1, blank_random]
         for thisComponent in fx_cross_practiceComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -1258,7 +1311,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         
         # --- Run Routine "fx_cross_practice" ---
         routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 1.0:
+        while continueRoutine:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1269,7 +1322,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # *fx_cross_1* updates
             
             # if fx_cross_1 is starting this frame...
-            if fx_cross_1.status == NOT_STARTED and tThisFlip >= 0.7-frameTolerance:
+            if fx_cross_1.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
                 fx_cross_1.frameNStart = frameN  # exact frame index
                 fx_cross_1.tStart = t  # local t and not account for scr refresh
@@ -1288,8 +1341,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # if fx_cross_1 is stopping this frame...
             if fx_cross_1.status == STARTED:
-                # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > fx_cross_1.tStartRefresh + 0.3-frameTolerance:
+                if frameN >= (fx_cross_1.frameNStart + fixDurFrames):
                     # keep track of stop time/frame for later
                     fx_cross_1.tStop = t  # not accounting for scr refresh
                     fx_cross_1.frameNStop = frameN  # exact frame index
@@ -1298,6 +1350,38 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     # update status
                     fx_cross_1.status = FINISHED
                     fx_cross_1.setAutoDraw(False)
+            
+            # *blank_random* updates
+            
+            # if blank_random is starting this frame...
+            if blank_random.status == NOT_STARTED and fx_cross_1.status==FINISHED:
+                # keep track of start time/frame for later
+                blank_random.frameNStart = frameN  # exact frame index
+                blank_random.tStart = t  # local t and not account for scr refresh
+                blank_random.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(blank_random, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'blank_random.started')
+                # update status
+                blank_random.status = STARTED
+                blank_random.setAutoDraw(True)
+            
+            # if blank_random is active this frame...
+            if blank_random.status == STARTED:
+                # update params
+                pass
+            
+            # if blank_random is stopping this frame...
+            if blank_random.status == STARTED:
+                if frameN >= (blank_random.frameNStart + fixBlankDurFrames):
+                    # keep track of stop time/frame for later
+                    blank_random.tStop = t  # not accounting for scr refresh
+                    blank_random.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'blank_random.stopped')
+                    # update status
+                    blank_random.status = FINISHED
+                    blank_random.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1325,11 +1409,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
         thisExp.addData('fx_cross_practice.stopped', globalClock.getTime())
-        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-        if routineForceEnded:
-            routineTimer.reset()
-        else:
-            routineTimer.addTime(-1.000000)
+        # the Routine "fx_cross_practice" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
         
         # --- Prepare to start Routine "stim_practice" ---
         continueRoutine = True
@@ -1357,7 +1438,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         
         # --- Run Routine "stim_practice" ---
         routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 4.0:
+        while continueRoutine and routineTimer.getTime() < 3.5:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1388,7 +1469,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if practice_stimulus is stopping this frame...
             if practice_stimulus.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > practice_stimulus.tStartRefresh + 0.3-frameTolerance:
+                if tThisFlipGlobal > practice_stimulus.tStartRefresh + 0.5-frameTolerance:
                     # keep track of stop time/frame for later
                     practice_stimulus.tStop = t  # not accounting for scr refresh
                     practice_stimulus.frameNStop = frameN  # exact frame index
@@ -1402,7 +1483,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             waitOnFlip = False
             
             # if key_resp_practice_stim is starting this frame...
-            if key_resp_practice_stim.status == NOT_STARTED and tThisFlip >= 0.3-frameTolerance:
+            if key_resp_practice_stim.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
                 # keep track of start time/frame for later
                 key_resp_practice_stim.frameNStart = frameN  # exact frame index
                 key_resp_practice_stim.tStart = t  # local t and not account for scr refresh
@@ -1420,7 +1501,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if key_resp_practice_stim is stopping this frame...
             if key_resp_practice_stim.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > key_resp_practice_stim.tStartRefresh + 3.7-frameTolerance:
+                if tThisFlipGlobal > key_resp_practice_stim.tStartRefresh + 3-frameTolerance:
                     # keep track of stop time/frame for later
                     key_resp_practice_stim.tStop = t  # not accounting for scr refresh
                     key_resp_practice_stim.frameNStop = frameN  # exact frame index
@@ -1476,7 +1557,103 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if routineForceEnded:
             routineTimer.reset()
         else:
-            routineTimer.addTime(-4.000000)
+            routineTimer.addTime(-3.500000)
+        
+        # --- Prepare to start Routine "feedback" ---
+        continueRoutine = True
+        # update component parameters for each repeat
+        thisExp.addData('feedback.started', globalClock.getTime())
+        # Run 'Begin Routine' code from code
+        feedback_text = 'CORRECTO' if correctAns == key_resp_practice_stim.keys else 'INCORRECTO'
+        feedback_text_comp.setText(feedback_text)
+        # keep track of which components have finished
+        feedbackComponents = [feedback_text_comp]
+        for thisComponent in feedbackComponents:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
+        
+        # --- Run Routine "feedback" ---
+        routineForceEnded = not continueRoutine
+        while continueRoutine and routineTimer.getTime() < 1.5:
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            
+            # *feedback_text_comp* updates
+            
+            # if feedback_text_comp is starting this frame...
+            if feedback_text_comp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                feedback_text_comp.frameNStart = frameN  # exact frame index
+                feedback_text_comp.tStart = t  # local t and not account for scr refresh
+                feedback_text_comp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(feedback_text_comp, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'feedback_text_comp.started')
+                # update status
+                feedback_text_comp.status = STARTED
+                feedback_text_comp.setAutoDraw(True)
+            
+            # if feedback_text_comp is active this frame...
+            if feedback_text_comp.status == STARTED:
+                # update params
+                pass
+            
+            # if feedback_text_comp is stopping this frame...
+            if feedback_text_comp.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > feedback_text_comp.tStartRefresh + 1.5-frameTolerance:
+                    # keep track of stop time/frame for later
+                    feedback_text_comp.tStop = t  # not accounting for scr refresh
+                    feedback_text_comp.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'feedback_text_comp.stopped')
+                    # update status
+                    feedback_text_comp.status = FINISHED
+                    feedback_text_comp.setAutoDraw(False)
+            
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, inputs=inputs, win=win)
+                return
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                routineForceEnded = True
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in feedbackComponents:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # --- Ending Routine "feedback" ---
+        for thisComponent in feedbackComponents:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        thisExp.addData('feedback.stopped', globalClock.getTime())
+        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+        if routineForceEnded:
+            routineTimer.reset()
+        else:
+            routineTimer.addTime(-1.500000)
         thisExp.nextEntry()
         
         if thisSession is not None:
@@ -1620,13 +1797,27 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             for paramName in thisTrial:
                 globals()[paramName] = thisTrial[paramName]
         
-        # --- Prepare to start Routine "fx_cross_routine" ---
+        # --- Prepare to start Routine "fx_cross_practice" ---
         continueRoutine = True
         # update component parameters for each repeat
-        thisExp.addData('fx_cross_routine.started', globalClock.getTime())
+        thisExp.addData('fx_cross_practice.started', globalClock.getTime())
+        # Run 'Begin Routine' code from code_5
+        # Fixation cross duration for this trial
+        fixDur = np.random.uniform(fixDurMin, fixDurMax)  # random between minimum and maximum
+        fixDurFrames = round(fixDur * 60)
+        thisExp.addData('fixation_duration',fixDurFrames/60) 
+        thisExp.addData('fixation_n_frames',fixDurFrames) 
+        
+        # Fixation cross duration for this trial
+        fixBlankDur = np.random.uniform(fixDurBlankMin, fixDurBlankMax) # random between minimum and maximum
+        fixBlankDurFrames = round(fixBlankDur * 60)
+        thisExp.addData('blank_duration',fixBlankDurFrames/60) 
+        thisExp.addData('blank_n_frames',fixBlankDurFrames) 
+        fx_cross_1.setText('+')
+        blank_random.setText('')
         # keep track of which components have finished
-        fx_cross_routineComponents = [fx_cross_text_2]
-        for thisComponent in fx_cross_routineComponents:
+        fx_cross_practiceComponents = [fx_cross_1, blank_random]
+        for thisComponent in fx_cross_practiceComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
             thisComponent.tStartRefresh = None
@@ -1638,9 +1829,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         _timeToFirstFrame = win.getFutureFlipTime(clock="now")
         frameN = -1
         
-        # --- Run Routine "fx_cross_routine" ---
+        # --- Run Routine "fx_cross_practice" ---
         routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 1.0:
+        while continueRoutine:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1648,38 +1839,69 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *fx_cross_text_2* updates
+            # *fx_cross_1* updates
             
-            # if fx_cross_text_2 is starting this frame...
-            if fx_cross_text_2.status == NOT_STARTED and tThisFlip >= 0.7-frameTolerance:
+            # if fx_cross_1 is starting this frame...
+            if fx_cross_1.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                fx_cross_text_2.frameNStart = frameN  # exact frame index
-                fx_cross_text_2.tStart = t  # local t and not account for scr refresh
-                fx_cross_text_2.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(fx_cross_text_2, 'tStartRefresh')  # time at next scr refresh
+                fx_cross_1.frameNStart = frameN  # exact frame index
+                fx_cross_1.tStart = t  # local t and not account for scr refresh
+                fx_cross_1.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(fx_cross_1, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'fx_cross_text_2.started')
+                thisExp.timestampOnFlip(win, 'fx_cross_1.started')
                 # update status
-                fx_cross_text_2.status = STARTED
-                fx_cross_text_2.setAutoDraw(True)
+                fx_cross_1.status = STARTED
+                fx_cross_1.setAutoDraw(True)
             
-            # if fx_cross_text_2 is active this frame...
-            if fx_cross_text_2.status == STARTED:
+            # if fx_cross_1 is active this frame...
+            if fx_cross_1.status == STARTED:
                 # update params
                 pass
             
-            # if fx_cross_text_2 is stopping this frame...
-            if fx_cross_text_2.status == STARTED:
-                # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > fx_cross_text_2.tStartRefresh + 0.3-frameTolerance:
+            # if fx_cross_1 is stopping this frame...
+            if fx_cross_1.status == STARTED:
+                if frameN >= (fx_cross_1.frameNStart + fixDurFrames):
                     # keep track of stop time/frame for later
-                    fx_cross_text_2.tStop = t  # not accounting for scr refresh
-                    fx_cross_text_2.frameNStop = frameN  # exact frame index
+                    fx_cross_1.tStop = t  # not accounting for scr refresh
+                    fx_cross_1.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'fx_cross_text_2.stopped')
+                    thisExp.timestampOnFlip(win, 'fx_cross_1.stopped')
                     # update status
-                    fx_cross_text_2.status = FINISHED
-                    fx_cross_text_2.setAutoDraw(False)
+                    fx_cross_1.status = FINISHED
+                    fx_cross_1.setAutoDraw(False)
+            
+            # *blank_random* updates
+            
+            # if blank_random is starting this frame...
+            if blank_random.status == NOT_STARTED and fx_cross_1.status==FINISHED:
+                # keep track of start time/frame for later
+                blank_random.frameNStart = frameN  # exact frame index
+                blank_random.tStart = t  # local t and not account for scr refresh
+                blank_random.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(blank_random, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'blank_random.started')
+                # update status
+                blank_random.status = STARTED
+                blank_random.setAutoDraw(True)
+            
+            # if blank_random is active this frame...
+            if blank_random.status == STARTED:
+                # update params
+                pass
+            
+            # if blank_random is stopping this frame...
+            if blank_random.status == STARTED:
+                if frameN >= (blank_random.frameNStart + fixBlankDurFrames):
+                    # keep track of stop time/frame for later
+                    blank_random.tStop = t  # not accounting for scr refresh
+                    blank_random.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'blank_random.stopped')
+                    # update status
+                    blank_random.status = FINISHED
+                    blank_random.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1693,7 +1915,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 routineForceEnded = True
                 break
             continueRoutine = False  # will revert to True if at least one component still running
-            for thisComponent in fx_cross_routineComponents:
+            for thisComponent in fx_cross_practiceComponents:
                 if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
                     continueRoutine = True
                     break  # at least one component has not yet finished
@@ -1702,16 +1924,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
                 win.flip()
         
-        # --- Ending Routine "fx_cross_routine" ---
-        for thisComponent in fx_cross_routineComponents:
+        # --- Ending Routine "fx_cross_practice" ---
+        for thisComponent in fx_cross_practiceComponents:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('fx_cross_routine.stopped', globalClock.getTime())
-        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-        if routineForceEnded:
-            routineTimer.reset()
-        else:
-            routineTimer.addTime(-1.000000)
+        thisExp.addData('fx_cross_practice.stopped', globalClock.getTime())
+        # the Routine "fx_cross_practice" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
         
         # --- Prepare to start Routine "stim" ---
         continueRoutine = True
@@ -1739,7 +1958,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         
         # --- Run Routine "stim" ---
         routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 4.0:
+        while continueRoutine and routineTimer.getTime() < 3.3:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1770,7 +1989,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if stimulus is stopping this frame...
             if stimulus.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > stimulus.tStartRefresh + 0.3-frameTolerance:
+                if tThisFlipGlobal > stimulus.tStartRefresh + 0.5-frameTolerance:
                     # keep track of stop time/frame for later
                     stimulus.tStop = t  # not accounting for scr refresh
                     stimulus.frameNStop = frameN  # exact frame index
@@ -1802,7 +2021,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if key_resp is stopping this frame...
             if key_resp.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > key_resp.tStartRefresh + 3.7-frameTolerance:
+                if tThisFlipGlobal > key_resp.tStartRefresh + 3-frameTolerance:
                     # keep track of stop time/frame for later
                     key_resp.tStop = t  # not accounting for scr refresh
                     key_resp.frameNStop = frameN  # exact frame index
@@ -1858,7 +2077,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if routineForceEnded:
             routineTimer.reset()
         else:
-            routineTimer.addTime(-4.000000)
+            routineTimer.addTime(-3.300000)
         
         # --- Prepare to start Routine "pause" ---
         continueRoutine = True
